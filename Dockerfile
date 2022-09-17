@@ -18,7 +18,11 @@ RUN pip install opentelemetry-instrumentation-fastapi
 
 RUN pip install opentelemetry-instrumentation-logging
 
+RUN pip install opentelemetry-instrumentation-sqlalchemy
+
 RUN pip install opentelemetry-exporter-otlp
+
+RUN pip install loguru
 
 COPY python_tracing_demo/ ./
 
