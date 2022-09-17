@@ -24,7 +24,7 @@ tracer = TracerProvider(resource=resource)
 trace.set_tracer_provider(tracer)
 
 # Use the OTLPSpanExporter to send traces to Tempo
-tracer.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint="http://tempo:8000")))
+tracer.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint="http://tempo:4317")))
 
 LoggingInstrumentor().instrument()
 FastAPIInstrumentor.instrument_app(app, tracer_provider=tracer)

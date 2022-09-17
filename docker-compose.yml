@@ -23,9 +23,17 @@ services:
     image: grafana/tempo:1.2.0
     command: [ "-search.enabled=true", "-config.file=/etc/tempo.yaml" ]
     volumes:
-      - ./config/tempo.yaml:/etc/tempo.yaml
+      - ./config/tempo.yaml:/etc/tempo.yaml    
     ports:
-      - 8000:8000 # tempo
+      # tempo.
+      # http://localhost:3200
+      - 3200:3200
+      # otlp grpc
+      # http://localhost:4317
+      - 4317:4317
+      # otlp http.
+      # http://localhost:4318
+      - 4318:4318
   tracing-demo:
     build: .
     ports:
