@@ -13,7 +13,6 @@ from opentelemetry.sdk.resources import Resource
 
 from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
-from opentelemetry.instrumentation.sqlalchemy import SQLAlchemyInstrumentor
 
 app = FastAPI()
 
@@ -29,7 +28,6 @@ tracer.add_span_processor(BatchSpanProcessor(OTLPSpanExporter(endpoint="http://t
 
 LoggingInstrumentor().instrument()
 FastAPIInstrumentor.instrument_app(app, tracer_provider=tracer)
-
 
 
 @app.get("/pokemon/{pokemon_name}")
