@@ -2,15 +2,23 @@ FROM tiangolo/uvicorn-gunicorn-fastapi:python3.9-slim
 
 RUN apt-get update && apt-get -y install curl
 
-RUN curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python && \
-          ln -s $HOME/.poetry/bin/poetry /usr/bin/poetry && \
-          poetry --version && \
-          poetry config virtualenvs.create false
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
 WORKDIR /app
 COPY poetry.lock pyproject.toml ./
 
-RUN poetry install --no-dev --no-interaction
+# RUN poetry install --no-dev
+RUN pip install httpx
+
+RUN pip install opentelemetry-api
+
+RUN pip install opentelemetry-sdk
+
+RUN pip install opentelemetry-instrumentation-fastapi
+
+RUN pip install opentelemetry-instrumentation-logging
+
+RUN pip install opentelemetry-exporter-otlp
 
 COPY python_tracing_demo/ ./
 
